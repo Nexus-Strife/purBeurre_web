@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+{% load static %}
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pur Beurre</title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/creative.min.css' %}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <style>
+      #panel_title
+      {
+      text-shadow: 2px 2px 2px black;
+      }
+
+      #panel_reg
+      {
+      width: 50%;
+      margin: 0 auto;
+      }
+
+      ::-webkit-input-placeholder {
+         font-style: italic;
+      }
+
+      :-moz-placeholder {
+         font-style: italic;
+      }
+
+      ::-moz-placeholder {
+         font-style: italic;
+      }
+
+      :-ms-input-placeholder {
+         font-style: italic;
+}
+    </style>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+</head>
+
+{% block nav_bar %}
+{% include 'web_app/nav_bar.html' %}
+{% endblock %}
+
+<body id="page-top">
+<header class="masthead text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-2 col-md-offset-4 col-lg-offset-8" id="panel_reg">
+                <div class="panel panel-default" >
+                    <div class="panel-heading">
+                        <h3 class="panel-title" id="panel_title">Enregistez-vous !</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" method="post" action="{% url 'web_app:register' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        {{ form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6">
+                                    <div class="form-group">
+                                        {{ form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-12">
+                                    <div class="form-group">
+                                        {{ form.nickname }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                {{ form.email }}
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-8 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        {{ form.password }}
+                                    </div>
+                                </div>
+                            </div>
+                                <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+</header>
+<footer class="page-footer text-center" style="background-color: #C45525;">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+        </div>
+        <div class="col-sm-6">
+            <p class="text-faded"><a href="#contact">Contact</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+<script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/creative.min.js' %}"></script>
+
+</body>
+
+</html>
