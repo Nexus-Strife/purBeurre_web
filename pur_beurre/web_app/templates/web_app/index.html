@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-  <head>
-    {% load static %}
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+  {% load static %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <title>Pur Beurre</title>
+  <title>Pur Beurre</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 
-    <!-- Custom fonts for this template -->
-    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
-    <!-- Plugin CSS -->
-    <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+  <!-- Plugin CSS -->
+  <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/creative.min.css' %}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/creative.min.css' %}" rel="stylesheet">
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+  <!-- Favicon -->
+  <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
 
-    <style>
+  <style>
       #slogan
       {
       text-shadow: 2px 2px 2px black;
@@ -56,104 +56,107 @@
 
     </style>
 
-  </head>
+</head>
 
-    {% block nav_bar %}
-    {% include 'web_app/nav_bar.html' %}
-    {% endblock %}
+{% block nav_bar %}
+{% include 'web_app/nav_bar.html' %}
+{% endblock %}
 
 
-  <body id="page-top">
-    <header class="masthead text-center text-white d-flex">
-      <div class="container my-auto">
-        <div class="row">
-          <div class="col-lg-10 mx-auto">
-            <h1 class="text-uppercase" id="slogan">
-              <strong>Du gras, oui, mais de qualité !</strong>
-            </h1>
-            <br>
-            <h2 id="desc_slogan">
-              Trouvez un produit de substitution pour ceux que vous consommez tous les jours.
-            </h2>
-            <br>
-          </div>
-          <div class="col-lg-11">
-            <input type="text" class="form-control input-sm" autocomplete="off" placeholder="Exemple: Nutella..." id="research">
-          </div>
-          <div class="col-lg-1">
-            <button type="button" class="btn btn-primary" id="submit">Chercher ! </button>
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <section class="bg-primary" id="about">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading text-white">Colette et Remy !</h2>
-            <hr class="light my-4">
-            <p class="text-faded mb-4"><u><strong>De la ratatouille aux croissants</strong></u></p>
-            <p class="text-faded mb-3">Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille.</p>
-          </div>
-            <div class="col-sm-6">
-              <p class="text-faded mb-1"><strong>Colette Tatou</strong>: "Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"</p>
-            </div>
-            <div class="col-sm-6">
-              <p class="text-faded mb-1"><strong>Remy</strong>: "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-8 mx-auto text-center">
-            <h2 class="section-heading">Contactez-nous !</h2>
-            <hr class="my-4">
-            <p class="mb-5">Un bug ? Une suggestion ? Un partenariat ?</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-lg-4 ml-auto text-center">
-            <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
-            <p>03.03.03.03.03</p>
-          </div>
-          <div class="col-lg-4 mr-auto text-center">
-            <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
-            <p>
-              <a href="mailto:mail@bidon.com">Mail</a>
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="page-footer text-center" style="background-color: #C45525;">
+<body id="page-top">
+<header class="masthead text-center text-white d-flex">
+  <div class="container my-auto">
+    <form role="form" method="post" action="{% url 'web_app:index' %}">
       <div class="row">
-        <div class="col-sm-6">
-          <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+        <div class="col-lg-10 mx-auto">
+          <h1 class="text-uppercase" id="slogan">
+            <strong>Du gras, oui, mais de qualité !</strong>
+          </h1>
+          <br>
+          <h2 id="desc_slogan">
+            Trouvez un produit de substitution pour ceux que vous consommez tous les jours.
+          </h2>
+          <br>
         </div>
-        <div class="col-sm-6">
-          <p class="text-faded"><a href="#contact">Contact</a></p>
+        <div class="col-lg-11">
+          {{ form.research }}
+        </div>
+        <div class="col-lg-1">
+          {% csrf_token %}
+          <button type="submit" value="search" class="btn btn-primary">Chercher ! </button>
         </div>
       </div>
-    </footer>
+    </form>
+  </div>
+</header>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<section class="bg-primary" id="about">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2 class="section-heading text-white">Colette et Remy !</h2>
+        <hr class="light my-4">
+        <p class="text-faded mb-4"><u><strong>De la ratatouille aux croissants</strong></u></p>
+        <p class="text-faded mb-3">Pur Beurre est l'initiative de deux amoureux de la gastronomie française, Colette Tatou et Rémy, que vous avez déjà certainement rencontrés dans notre excellent restaurant Ratatouille.</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="text-faded mb-1"><strong>Colette Tatou</strong>: "Nous aimons tous manger, surtout en France ! Personnellement, une baguette fraîche, du bon fromage de chèvre et un bon vin rouge me suffisent amplement. Comme tout le monde, je fais mes courses au supermarché. Mais petit à petit je me suis rendue compte, surtout lorsque nous avons ouvert le restaurant, que je pouvais remplacer les produits aseptisés que j'avais l'habitude d'acheter par de bons produits du terroir Et souvent pour le même prix !"</p>
+      </div>
+      <div class="col-sm-6">
+        <p class="text-faded mb-1"><strong>Remy</strong>: "Pour ma part je me rendais déjà dans bien des magasins car j'aime beaucoup me balader, surtout dans les caves et les cuisines. Je connaissais par coeur le contenu des boutiques bio (dont je raffole) ainsi que les ingrédients de tous les aliments vendus. Lorsque Colette m'a demandé si elle pouvait remplacer son Nutella matinal par un aliment plus sain, je savais tout de suite où le trouver. L'idée de Pur Beurre était née !"</p>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
 
-    <!-- Plugin JavaScript -->
-    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-    <script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <h2 class="section-heading">Contactez-nous !</h2>
+        <hr class="my-4">
+        <p class="mb-5">Un bug ? Une suggestion ? Un partenariat ?</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 ml-auto text-center">
+        <i class="fas fa-phone fa-3x mb-3 sr-contact-1"></i>
+        <p>03.03.03.03.03</p>
+      </div>
+      <div class="col-lg-4 mr-auto text-center">
+        <i class="fas fa-envelope fa-3x mb-3 sr-contact-2"></i>
+        <p>
+          <a href="mailto:mail@bidon.com">Mail</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Custom scripts for this template -->
-    <script src="{% static 'js/creative.min.js' %}"></script>
+<footer class="page-footer text-center" style="background-color: #C45525;">
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+    </div>
+    <div class="col-sm-6">
+      <p class="text-faded"><a href="#contact">Contact</a></p>
+    </div>
+  </div>
+</footer>
 
-  </body>
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+<script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/creative.min.js' %}"></script>
+
+</body>
 
 </html>

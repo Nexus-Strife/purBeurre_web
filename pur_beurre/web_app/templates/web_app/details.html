@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Pur Beurre</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="{% static 'vendor/magnific-popup/magnific-popup.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/creative.min.css' %}" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
+
+    <style>
+      #hello_user
+      {
+      text-shadow: 2px 2px 2px black;
+      }
+
+      ::-webkit-input-placeholder {
+         font-style: italic;
+      }
+
+      :-moz-placeholder {
+         font-style: italic;
+      }
+
+      ::-moz-placeholder {
+         font-style: italic;
+      }
+
+      :-ms-input-placeholder {
+         font-style: italic;
+      }
+      .bg-image {
+
+  /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+    </style>
+
+
+</head>
+
+{% block nav_bar %}
+{% include 'web_app/nav_bar.html' %}
+{% endblock %}
+
+
+<body id="page-top">
+<header class="masthead text-center text-white d-flex" style="background-image:url({{ detailed_prod.img_url }});">
+    <div class="container my-auto">
+        <div class="row justify-content-center">
+            <h2 class="text-uppercase" id="hello_user">
+                <strong> {{ detailed_prod.name }} </strong>
+            </h2>
+        </div>
+    </div>
+</header>
+
+<section class="bg-primary text-center text-white d-flex" id="by">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-4 mx-auto">
+                Nutriscore:<br>
+                <strong> {{ detailed_prod.grade }} </strong>
+            </div>
+            <div class="col-lg-4 mx-auto">
+                Repères nutritionnels pour 100g:
+                <table class="table">
+                    <thread>
+                        <tr>
+                            <th>Composé</th>
+                            <th>Valeur</th>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Proteines:</td>
+                            <td>{{ detailed_prod.proteins_100g }}g</td><br>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Sucres:</td>
+                            <td>{{ detailed_prod.sugars_100g }}g</td><br>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Gras:</td>
+                            <td>{{ detailed_prod.fat_100g }}g</td><br>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Sel:</td>
+                            <td>{{ detailed_prod.salt_100g }}g</td><br>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Acide gras saturés:</td>
+                            <td>{{ detailed_prod.saturated_fat_100g }}g</td><br>
+                        </tr>
+                    </thread>
+                    <thread>
+                        <tr>
+                            <td>Energie (joule)</td>
+                            <td>{{ detailed_prod.kj_100g }}j</td><br>
+                        </tr>
+                    </thread>
+                </table>
+            </div>
+            <div class="col-lg-12">
+                <a target="_blank" rel="noopener noreferer" href="{{ detailed_prod.url }}" style="color:blue;">Voir la fiche d'OpenFoodFacts</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="page-footer text-center" style="background-color: #C45525;">
+    <div class="row">
+        <div class="col-sm-6">
+            <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+        </div>
+        <div class="col-sm-6">
+            <p class="text-faded"><a href="#contact">Contact</a></p>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Plugin JavaScript -->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+<script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
+<script src="{% static 'vendor/magnific-popup/jquery.magnific-popup.min.js' %}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/creative.min.js' %}"></script>
+
+</body>
+
+</html>

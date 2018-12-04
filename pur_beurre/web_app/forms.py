@@ -3,8 +3,8 @@ from django import forms
 
 class LoginForm(forms.Form):
 
-    nickname = forms.CharField(label="Votre pseudo", max_length=15, widget=forms.TextInput(attrs={'placeholder': 'Votre pseudo', 'class': 'form-control'}))
-    password = forms.CharField(label="Votre mot de passe", widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe', 'class': 'form-control'}))
+    nickname = forms.CharField(label="Votre pseudo", max_length=15, widget=forms.TextInput(attrs={'placeholder': 'Votre pseudo', 'class': 'form-control', 'autocomplete': 'off'}))
+    password = forms.CharField(label="Votre mot de passe", widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe', 'class': 'form-control', 'autocomplete': 'off'}))
 
 
 class RegisterForm(forms.Form):
@@ -13,3 +13,12 @@ class RegisterForm(forms.Form):
     nickname = forms.CharField(label="Pseudo", max_length=15, widget=forms.TextInput(attrs={'placeholder': 'Pseudo', 'class': 'form-control'}))
     email = forms.EmailField(label="E-mail", max_length=50, widget=forms.TextInput(attrs={'placeholder': 'E-mail', 'class': 'form-control'}))
     password = forms.CharField(label="Mot de passe", widget=forms.PasswordInput(attrs={'placeholder': 'Mot de passe', 'class': 'form-control'}))
+
+
+class SearchForm(forms.Form):
+    research = forms.CharField(label="Recherche", widget=forms.TextInput(attrs={'placeholder': 'Exemple: Nutella...', 'class': 'form-control input-sm', 'autocomplete': 'off'}))
+
+
+class SaveForm(forms.Form):
+    checkbox = forms.BooleanField()
+
