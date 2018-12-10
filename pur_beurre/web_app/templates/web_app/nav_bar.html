@@ -20,7 +20,7 @@
              </li>
              <li class="nav-item">
                  {% if user.is_authenticated %}
-                 <a class="nav-link js-scroll-trigger" href=""><img src="{% static 'img/carrot.png' %}" height="30" width="30" title="Mes aliments"></a>
+                 <a class="nav-link js-scroll-trigger" href="{% url 'web_app:my_favs' %}"><img src="{% static 'img/carrot.png' %}" height="30" width="30" title="Mes aliments"></a>
                  {% else %}
                  <p></p>
                  {% endif %}

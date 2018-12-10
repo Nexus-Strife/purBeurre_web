@@ -10,7 +10,10 @@ urlpatterns = [
     path('mon_compte/', views.my_account, name='my_account'),
     path('results/<product>/', views.results, name='results'),
     path('details/<product>/', views.details, name='details'),
-    path('test/', views.test, name='test')
+    path('save/', views.saveproduct, name='saveproduct'),
+    path('ajax/save/', views.saveproduct, name='save'),
+    path('ajax/delete/', views.delete_prod, name='delete'),
+    path('my_favs/', views.my_favs, name='my_favs')
 
 ]
 

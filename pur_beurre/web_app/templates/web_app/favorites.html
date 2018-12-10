@@ -28,6 +28,24 @@
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
 
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+        <script>
+    $(function() {
+        $(".delete").on("click", function () {
+           $(this).hide();
+           var val = $(this).val();
+           console.log(val);
+           var value
+             $.ajax({
+               url: '{% url 'web_app:delete' %}',
+               data: { 'value': val },
+           dataType: 'json',
+           success: function (data) {
+               console.log("Supprimé !");
+           }
+        });
+    });
+    });
+    </script>
 
     <style>
       #hello_user
@@ -52,27 +70,6 @@
       }
 
     </style>
-    <script>
-    $(function() {
-        $(".save").on("click", function () {
-           $(this).hide();
-           var val = $(this).val();
-           var searched = $('#searched').text();
-           console.log(val);
-           console.log(searched)
-           var value
-             $.ajax({
-               url: '{% url 'web_app:save' %}',
-               data: { 'value': val, 'searched': searched},
-           dataType: 'json',
-           success: function (data) {
-               console.log("Enregistré !");
-           }
-        });
-    });
-    });
-    </script>
-
 
 </head>
 
@@ -82,11 +79,11 @@
 
 
 <body id="page-top">
-<header class="masthead text-center text-white d-flex" style="background-image:url({{ searched.img_url }});">
+<header class="masthead text-center text-white d-flex">
     <div class="container my-auto">
         <div class="row justify-content-center">
             <h2 class="text-uppercase" id="hello_user">
-                <strong id="searched">{{ searched.name }}</strong>
+                <strong> Mes aliments favoris</strong>
             </h2>
         </div>
     </div>
@@ -95,22 +92,31 @@
 <section class="bg-primary text-center text-white d-flex" id="by">
     <div class="container my-auto">
         <div class="row">
-            <div class="col-lg-12 mx-auto">
-                Vous pouvez remplacer cet aliment par:<br><br>
-            </div>
-
-            {% for prod in prods %}
-
+            {% for prod in favs_prod %}
             <ul>
-                <div class="col-lg-12 ">
-                    <a href="{% url 'web_app:details' prod.name %}"><img src="{{ prod.img_url }}" height="150" width="130" alt="{{ prod.name }}"></a>
-                    <p class="text-faded mb-3 center">{{ prod.name }}</p>{% if user.is_authenticated %}<button type="submit" value="{{ prod.id }}" class="save btn-warning" id="save_{{ prod.id }}"><i class="fas fa-save"></i> Enregistrer</button>{% endif %}
-                    <p id="p-text"></p>
+                <div class="col-lg-12">
+                    <a href=""><img src="{{ prod.image }}" height="150" width="130" alt="{{ prod.name }}"></a>
+                    <p class="text-faded mb-3 center">{{ prod.name }}</p><button type="submit" value="{{ prod.prod_id }}" class="delete btn-warning" id="delete_{{ prod.id }}"><i class="fa fa-trash"> Supprimer</i></button>
                     {% csrf_token %}
                 </div>
             </ul>
             {% endfor %}
-
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="text center"><h4><i>Substituts</i>:</h4></p>
+            </div>
+        </div>
+        <div class="row">
+            {% for prod in favs_sub %}
+            <ul>
+                <div class="col-lg-12">
+                    <a href=""><img src="{{ prod.img }}" height="150" width="130" alt="{{ prod.name }}"></a>
+                    <p class="text-faded mb-3 center">{{ prod.name }}</p><button type="submit" value="{{ prod.prod_id }}" class="delete btn-warning" id="delete_{{ prod.id }}"><i class="fa fa-trash"> Supprimer</i></button>
+                    {% csrf_token %}
+                </div>
+            </ul>
+            {% endfor %}
         </div>
     </div>
 </section>

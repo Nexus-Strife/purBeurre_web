@@ -23,6 +23,12 @@ class Products(models.Model):
     saturated_fat_100g = models.FloatField()
 
 
+class Favs(models.Model):
+    prod_id = models.IntegerField()
+    prod_substitute_id = models.IntegerField()
+    user_id = models.IntegerField()
+
+
 
 
 
