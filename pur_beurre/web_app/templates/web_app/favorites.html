@@ -95,7 +95,7 @@
             {% for prod in favs_prod %}
             <ul>
                 <div class="col-lg-12">
-                    <a href=""><img src="{{ prod.image }}" height="150" width="130" alt="{{ prod.name }}"></a>
+                    <a href="{% url 'web_app:details' prod.name %}"><img src="{{ prod.image }}" height="150" width="130" alt="{{ prod.name }}"></a>
                     <p class="text-faded mb-3 center">{{ prod.name }}</p><button type="submit" value="{{ prod.prod_id }}" class="delete btn-warning" id="delete_{{ prod.id }}"><i class="fa fa-trash"> Supprimer</i></button>
                     {% csrf_token %}
                 </div>
@@ -111,8 +111,8 @@
             {% for prod in favs_sub %}
             <ul>
                 <div class="col-lg-12">
-                    <a href=""><img src="{{ prod.img }}" height="150" width="130" alt="{{ prod.name }}"></a>
-                    <p class="text-faded mb-3 center">{{ prod.name }}</p><button type="submit" value="{{ prod.prod_id }}" class="delete btn-warning" id="delete_{{ prod.id }}"><i class="fa fa-trash"> Supprimer</i></button>
+                    <a href="{% url 'web_app:details' prod.name %}"><img src="{{ prod.img }}" height="150" width="130" alt="{{ prod.name }}"></a>
+                    <p class="text-faded mb-3 center">{{ prod.name }}</p><button type="submit" value="{{ prod.sub_prod_id }}" class="delete btn-warning" id="delete_{{ prod.sub_prod_id }}"><i class="fa fa-trash"> Supprimer</i></button>
                     {% csrf_token %}
                 </div>
             </ul>

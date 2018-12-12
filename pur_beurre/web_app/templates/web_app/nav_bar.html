@@ -8,8 +8,9 @@
      </button>
      <div class="collapse navbar-collapse" id="navbarResponsive">
          <ul class="navbar-nav ml-auto">
-             <form class="form-inline my-2 my-lg-0">
-                 <input class="form-control mr-sm-2" type="search" placeholder="Chercher" aria-label="Search">
+             <form class="form-inline my-2 my-lg-0" role="form" method="post" action="{% url 'web_app:index' %}">
+                 {{ form_nav.research }}
+                 {% csrf_token %}
              </form>
              <li class="nav-item">
                  {% if user.is_authenticated %}

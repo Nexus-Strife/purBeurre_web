@@ -19,6 +19,10 @@ class SearchForm(forms.Form):
     research = forms.CharField(label="Recherche", widget=forms.TextInput(attrs={'placeholder': 'Exemple: Nutella...', 'class': 'form-control input-sm', 'autocomplete': 'off'}))
 
 
+class SearchForm_NavBar(forms.Form):
+    research = forms.CharField(label="Recherche", widget=forms.TextInput(attrs={'placeholder': 'Chercher un aliment', 'class':'form-control mr-sm-2', 'autocomplete': 'off'}))
+
+
 class SaveForm(forms.Form):
     checkbox = forms.BooleanField()
 

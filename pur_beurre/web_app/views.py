@@ -3,11 +3,11 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as log
 from django.contrib.auth import logout as out
-from django.core.exceptions import MultipleObjectsReturned
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponseRedirect, JsonResponse
-from .forms import LoginForm, RegisterForm, SearchForm, SaveForm
+from .forms import LoginForm, RegisterForm, SearchForm, SaveForm, SearchForm_NavBar
 from .models import Products, Favs
 import psycopg2
 
@@ -21,14 +21,17 @@ def index(request):
 
     if request.method == 'POST':
         form = SearchForm(request.POST)
+        form_nav = SearchForm_NavBar(request.POST)
         if form.is_valid():
             product = form.cleaned_data['research']
             return redirect('results/' + product + '/')
         else:
             form = SearchForm()
+            form_nav = SearchForm_NavBar()
 
     else:
         form = SearchForm()
+        form_nav = SearchForm_NavBar()
         return render(request, "web_app/index.html", locals())
 
 
@@ -83,14 +86,31 @@ def logout(request):
 @login_required
 def my_account(request):
 
+    if request.method == 'POST':
+        form_nav = SearchForm_NavBar(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['research']
+            return redirect('result/' + product + '/')
+        else:
+            form_nav = SearchForm_NavBar()
+    else:
+        form_nav = SearchForm_NavBar()
+
     return render(request, "web_app/account.html", locals())
 
 
 def results(request, product):
-    form = SaveForm()
-    conn = None
-    conn = psycopg2.connect(host=hostname, user=user, password=password, database=database)
-    cur = conn.cursor()
+
+    if request.method == 'POST':
+        form_nav = SearchForm_NavBar(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['research']
+            return redirect('result/' + product + '/')
+        else:
+            form_nav = SearchForm_NavBar()
+    else:
+        form_nav = SearchForm_NavBar()
+
     prods = Products.objects.raw("SELECT * FROM web_app_products WHERE name LIKE %(p)s ORDER by grade ASC", {"p": "%{}%".format(product.replace(' ', '%'))})
 
     try:
@@ -103,6 +123,17 @@ def results(request, product):
 
 
 def details(request, product):
+
+    if request.method == 'POST':
+        form_nav = SearchForm_NavBar(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['research']
+            return redirect('result/' + product + '/')
+        else:
+            form_nav = SearchForm_NavBar()
+    else:
+        form_nav = SearchForm_NavBar()
+
     detailed_prod = Products.objects.filter(name__iexact=product).first()
     return render(request, "web_app/details.html", locals())
 
@@ -135,10 +166,19 @@ def saveproduct(request):
 
 
 def my_favs(request):
+
     current_user = request.user
-    conn = None
-    conn = psycopg2.connect(host=hostname, user=user, password=password, database=database)
-    cur = conn.cursor()
+    curr_id = current_user.id
+    if request.method == 'POST':
+        form_nav = SearchForm_NavBar(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['research']
+            return redirect('result/' + product + '/')
+        else:
+            form_nav = SearchForm_NavBar()
+    else:
+        form_nav = SearchForm_NavBar()
+
     favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = 15")
@@ -154,7 +194,12 @@ def my_favs(request):
 def delete_prod(request):
     deleted = request.GET.get('value')
     id = 'ROFL'
-    print(deleted)
-    fav = Favs.objects.get(prod_id=deleted).delete()
+    try:
+        fav = Favs.objects.get(prod_id=deleted).delete()
+    except Favs.DoesNotExist:
+        prod = Favs.objects.get(prod_substitute_id=deleted)  # Getting the line where is locate the sub's id
+        product_id = prod.prod_id
+        fav = Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
+
     data = {'respond': id}
     return JsonResponse(data)
