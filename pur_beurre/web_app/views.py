@@ -35,6 +35,21 @@ def index(request):
         return render(request, "web_app/index.html", locals())
 
 
+def legals(request):
+
+    if request.method == 'POST':
+        form_nav = SearchForm_NavBar(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['research']
+            return redirect('result/' + product + '/')
+        else:
+            form_nav = SearchForm_NavBar()
+    else:
+        form_nav = SearchForm_NavBar()
+
+    return render(request, "web_app/legals.html", locals())
+
+
 def register(request):
 
     if request.method == 'POST':
@@ -181,12 +196,12 @@ def my_favs(request):
 
     favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image"
                                 " from web_app_favs waf"
-                                " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = 15")
+                                " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = %s", (curr_id, ))
 
     favs_sub = Products.objects.raw("SELECT waf.prod_substitute_id as sub_prod_id, wap.name as name, waf.id, wap.img_url as img"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_substitute_id = wap.id"
-                                " LEFT JOIN web_app_products as sp ON waf.prod_substitute_id = sp.id WHERE user_id = 15")
+                                " LEFT JOIN web_app_products as sp ON waf.prod_substitute_id = sp.id WHERE user_id = %s", (curr_id, ))
 
     return render(request, "web_app/favorites.html", locals())
 

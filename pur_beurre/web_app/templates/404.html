@@ -11,9 +11,7 @@
     <title>Pur Beurre</title>
 
     <!-- Bootstrap core CSS -->
-
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -29,16 +27,12 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}">
 
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
     <style>
-      #panel_title
+      #hello_user
       {
       text-shadow: 2px 2px 2px black;
-      }
-
-      #panel_reg
-      {
-      width: 50%;
-      margin: 0 auto;
       }
 
       ::-webkit-input-placeholder {
@@ -55,54 +49,33 @@
 
       :-ms-input-placeholder {
          font-style: italic;
-}
+      }
+
     </style>
 
-    <script>
-
-    </script>
 </head>
-
-<body id="page-top">
 
 {% block nav_bar %}
 {% include 'web_app/nav_bar.html' %}
 {% endblock %}
 
 
+<body id="page-top">
 <header class="masthead text-center text-white d-flex">
     <div class="container my-auto">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-2 col-md-offset-4 col-lg-offset-8" id="panel_reg">
-                <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <h3 class="panel-title" id="panel_title">Identification: </h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post" action="{% url 'web_app:login' %}">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        {{ form.nickname }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-8 col-md-12 col-lg-12">
-                                        <div class="form-group">
-                                            {{ form.password }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Connexion" class="btn btn-info btn-block">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+        <div class="row justify-content-center">
+            <h2 class="text-uppercase" id="hello_user">
+                <strong>Erreur 404</strong><br><br>
+            </h2><br>
+            <h3>
+                <strong>Ce produit n'existe pas dans votre base données</strong>
+            </h3>
         </div>
     </div>
 </header>
+
+
+
 <footer class="page-footer text-center" style="background-color: #C45525;">
     <div class="row">
         <div class="col-sm-6">
@@ -115,7 +88,7 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 <!-- Plugin JavaScript -->
