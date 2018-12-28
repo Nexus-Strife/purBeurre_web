@@ -194,11 +194,11 @@ def my_favs(request):
     else:
         form_nav = SearchForm_NavBar()
 
-    favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image"
+    favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image, wap.grade as grade"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = %s", (curr_id, ))
 
-    favs_sub = Products.objects.raw("SELECT waf.prod_substitute_id as sub_prod_id, wap.name as name, waf.id, wap.img_url as img"
+    favs_sub = Products.objects.raw("SELECT waf.prod_substitute_id as sub_prod_id, wap.name as name, waf.id, wap.img_url as img, wap.grade as nutriscore"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_substitute_id = wap.id"
                                 " LEFT JOIN web_app_products as sp ON waf.prod_substitute_id = sp.id WHERE user_id = %s", (curr_id, ))
