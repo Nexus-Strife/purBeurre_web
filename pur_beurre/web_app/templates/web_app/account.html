@@ -27,30 +27,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.ico' %}">
 
-    <style>
-      #hello_user
-      {
-      text-shadow: 2px 2px 2px black;
-      }
-
-      ::-webkit-input-placeholder {
-         font-style: italic;
-      }
-
-      :-moz-placeholder {
-         font-style: italic;
-      }
-
-      ::-moz-placeholder {
-         font-style: italic;
-      }
-
-      :-ms-input-placeholder {
-         font-style: italic;
-      }
-
-    </style>
-
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
 
   </head>
 
@@ -63,7 +40,7 @@
   <header class="masthead text-center text-white d-flex">
       <div class="container my-auto">
           <div class="row justify-content-center">
-                  <h2 class="text-uppercase" id="hello_user">
+                  <h2 class="text-uppercase" id="fancy_txt">
                       <strong>Ahoy {{ user.first_name }} !</strong>
                   </h2>
               </div>
@@ -84,7 +61,7 @@
   <footer class="page-footer text-center" style="background-color: #C45525;">
       <div class="row">
         <div class="col-sm-6">
-          <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+          <p class="text-faded"><a href="{% url 'web_app:legals' %}">Mentions légales</a></p>
         </div>
         <div class="col-sm-6">
           <p class="text-faded"><a href="#contact">Contact</a></p>

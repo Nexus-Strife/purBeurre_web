@@ -28,35 +28,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %}">
-
-    <style>
-      #panel_title
-      {
-      text-shadow: 2px 2px 2px black;
-      }
-
-      #panel_reg
-      {
-      width: 50%;
-      margin: 0 auto;
-      }
-
-      ::-webkit-input-placeholder {
-         font-style: italic;
-      }
-
-      :-moz-placeholder {
-         font-style: italic;
-      }
-
-      ::-moz-placeholder {
-         font-style: italic;
-      }
-
-      :-ms-input-placeholder {
-         font-style: italic;
-}
-    </style>
+    <link href="{% static 'css/custom' %}" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 
@@ -113,7 +85,7 @@
 <footer class="page-footer text-center" style="background-color: #C45525;">
     <div class="row">
         <div class="col-sm-6">
-            <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+            <p class="text-faded"><a href="{% url 'web_app:legals' %}">Mentions légales</a></p>
         </div>
         <div class="col-sm-6">
             <p class="text-faded"><a href="#contact">Contact</a></p>

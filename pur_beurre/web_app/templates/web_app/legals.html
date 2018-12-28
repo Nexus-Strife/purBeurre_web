@@ -29,30 +29,6 @@
 
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 
-    <style>
-      #hello_user
-      {
-      text-shadow: 2px 2px 2px black;
-      }
-
-      ::-webkit-input-placeholder {
-         font-style: italic;
-      }
-
-      :-moz-placeholder {
-         font-style: italic;
-      }
-
-      ::-moz-placeholder {
-         font-style: italic;
-      }
-
-      :-ms-input-placeholder {
-         font-style: italic;
-      }
-
-    </style>
-
 </head>
 
 {% block nav_bar %}
@@ -135,7 +111,7 @@
 <footer class="page-footer text-center" style="background-color: #C45525;">
     <div class="row">
         <div class="col-sm-6">
-            <p class="text-faded"><a href="127.0.0.1:8000">Mentions légales</a></p>
+            <p class="text-faded"><a href="{% url 'web_app:legals' %}">Mentions légales</a></p>
         </div>
         <div class="col-sm-6">
             <p class="text-faded"><a href="#contact">Contact</a></p>
