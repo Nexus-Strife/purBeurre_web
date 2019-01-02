@@ -32,26 +32,45 @@ class LoginPageTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+class TestAPI(TestCase):
+
+    def test_api_json(self):
+        response = self.client.get('https://fr.openfoodfacts.org/categories.json')
+        self.assertEqual(response.status_code, 200)
+
+
 class LoginTestCase(TestCase):
 
     """Create a fake user and test the login function"""
 
-    def fakeUser(self):
+    def fake_user(self):
 
-        self.username = "test"
-        self.password = "test"
+        self.username = "Fake"
+        self.password = "User"
         self.email = "test@test.test"
-        self.first_name = "testeur"
-        self.last_name = "foo"
+        self.first_name = "Fake"
+        self.last_name = "User"
 
         # Save the fake user
-        User.objects.create_user(self.username, self.email, self.password)
+        User.objects.create_user(self.username, self.email, self.password, self.first_name, self.last_name)
 
     def test_login_good_values(self):
 
         """Test login with the fake user"""
 
+        self.username = "test"
+        self.password = "test"
+
         response = self.client.post(reverse('web_app:login'), {'username': self.username, 'password': self.password})
         self.assertEqual(response.status_code, 200)
 
+    def test_login_wrong_values(self):
+
+        """Test login with wrongs value"""
+
+        self.username = "Not_Fake"
+        self.password = "Wrong_Pass"
+
+        response = self.client.post(reverse('web_app:login'), {'username': self.username, 'password': self.password})
+        self.assertEqual(response.status_code, 200)
 

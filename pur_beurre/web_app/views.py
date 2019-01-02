@@ -22,7 +22,7 @@ def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         form_nav = SearchForm_NavBar(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # If the search form is valid, search for the product and display the results
             product = form.cleaned_data['research']
             return redirect('results/' + product + '/')
         else:
@@ -31,11 +31,11 @@ def index(request):
 
     else:
         form = SearchForm()
-        form_nav = SearchForm_NavBar()
+        form_nav = SearchForm_NavBar()  # Display a search bar inside de navbar
         return render(request, "web_app/index.html", locals())
 
 
-def legals(request):
+def legals(request):  # Display legal notice
 
     if request.method == 'POST':
         form_nav = SearchForm_NavBar(request.POST)
@@ -50,11 +50,11 @@ def legals(request):
     return render(request, "web_app/legals.html", locals())
 
 
-def register(request):
+def register(request):  # Route to the register page
 
     if request.method == 'POST':
         form = RegisterForm(request.POST)
-        if form.is_valid():
+        if form.is_valid():  # If all fields are complete then register the user with values of each field
             username = form.cleaned_data['nickname']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
@@ -62,7 +62,7 @@ def register(request):
             last_name = form.cleaned_data['last_name']
             user = User.objects.create_user(username=username, email=email, password=password, first_name=first_name,
                                             last_name=last_name)
-            return redirect('../login/')
+            return redirect('../login/')  # And redirect him to the login page
 
         else:
             pass
@@ -73,18 +73,18 @@ def register(request):
     return render(request, "web_app/register.html", locals())
 
 
-def login(request):
+def login(request):  # Login page
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['nickname']
             password = form.cleaned_data['password']
             user = authenticate(username=username, password=password)
-            if user is not None:
+            if user is not None:  # If the auth didn't return an error, log the user
                 log(request, user)
-                return redirect('../index/')
+                return redirect('../index/')  # And redirect him to the index page
             else:
-                return redirect('../register/')
+                pass
         else:
             pass
     else:
@@ -93,13 +93,13 @@ def login(request):
     return render(request, "web_app/connexion.html", locals())
 
 
-def logout(request):
+def logout(request):  # Logout function
     out(request)
-    return redirect('../login/')
+    return redirect('../login/')  # Once the user has been logged out redirect him into the login page
 
 
 @login_required
-def my_account(request):
+def my_account(request):  # Display the account's page
 
     if request.method == 'POST':
         form_nav = SearchForm_NavBar(request.POST)
@@ -114,7 +114,7 @@ def my_account(request):
     return render(request, "web_app/account.html", locals())
 
 
-def results(request, product):
+def results(request, product):  # Display the result of the search function
 
     if request.method == 'POST':
         form_nav = SearchForm_NavBar(request.POST)
@@ -125,19 +125,22 @@ def results(request, product):
             form_nav = SearchForm_NavBar()
     else:
         form_nav = SearchForm_NavBar()
-
-    prods = Products.objects.raw("SELECT * FROM web_app_products WHERE name LIKE %(p)s ORDER by grade ASC", {"p": "%{}%".format(product.replace(' ', '%'))})
+    # Search for every product that contains words searched by the user
+    prods = Products.objects.raw("SELECT * FROM web_app_products WHERE name LIKE %(p)s ORDER by grade ASC", {"p": "%{}%"
+                                 .format(product.replace(' ', '%'))})
 
     try:
+        # Check if the user entered the precise name of a product
         searched = get_object_or_404(Products, name__icontains=product)
 
     except MultipleObjectsReturned:
+        # If the product is registered multiple time, display only one
         searched = Products.objects.filter(name__icontains=product).first()
 
     return render(request, "web_app/results.html", locals())
 
 
-def details(request, product):
+def details(request, product):  # Display the details of a selected product
 
     if request.method == 'POST':
         form_nav = SearchForm_NavBar(request.POST)
@@ -180,7 +183,7 @@ def saveproduct(request):
         return JsonResponse(data)
 
 
-def my_favs(request):
+def my_favs(request):  # Display the saved products of an user
 
     current_user = request.user
     curr_id = current_user.id
@@ -193,11 +196,11 @@ def my_favs(request):
             form_nav = SearchForm_NavBar()
     else:
         form_nav = SearchForm_NavBar()
-
+    #  Select all products from the prod_id's column
     favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image, wap.grade as grade"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = %s", (curr_id, ))
-
+    #  Select all products from the prod_substitute_id's column
     favs_sub = Products.objects.raw("SELECT waf.prod_substitute_id as sub_prod_id, wap.name as name, waf.id, wap.img_url as img, wap.grade as nutriscore"
                                 " from web_app_favs waf"
                                 " INNER JOIN web_app_products wap ON waf.prod_substitute_id = wap.id"
@@ -210,11 +213,20 @@ def delete_prod(request):
     deleted = request.GET.get('value')
     id = 'ROFL'
     try:
-        fav = Favs.objects.get(prod_id=deleted).delete()
+        Favs.objects.filter(prod_id=deleted)[1].delete()
+
+    except IndexError:
+        print(id)
+        prod = Favs.objects.filter(prod_substitute_id=deleted).first()
+        product_id = prod.prod_id
+        Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
     except Favs.DoesNotExist:
         prod = Favs.objects.get(prod_substitute_id=deleted)  # Getting the line where is locate the sub's id
         product_id = prod.prod_id
-        fav = Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
+        Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
+    except Favs.MultipleObjectsReturned:
+        # Favs.objects.get(prod_id=deleted).first()
+        print(id)
 
     data = {'respond': id}
     return JsonResponse(data)
