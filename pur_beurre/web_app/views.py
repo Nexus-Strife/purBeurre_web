@@ -197,26 +197,33 @@ def my_favs(request):  # Display the saved products of an user
     else:
         form_nav = SearchForm_NavBar()
     #  Select all products from the prod_id's column
-    favs_prod = Products.objects.raw("SELECT waf.prod_id as prod_id, wap.name as name, waf.id, wap.img_url as image, wap.grade as grade"
-                                " from web_app_favs waf"
-                                " INNER JOIN web_app_products wap ON waf.prod_id = wap.id WHERE user_id = %s", (curr_id, ))
-    #  Select all products from the prod_substitute_id's column
-    favs_sub = Products.objects.raw("SELECT waf.prod_substitute_id as sub_prod_id, wap.name as name, waf.id, wap.img_url as img, wap.grade as nutriscore"
-                                " from web_app_favs waf"
-                                " INNER JOIN web_app_products wap ON waf.prod_substitute_id = wap.id"
-                                " LEFT JOIN web_app_products as sp ON waf.prod_substitute_id = sp.id WHERE user_id = %s", (curr_id, ))
+
+    test_prods = Products.objects.raw("SELECT p.name AS prod_name, p.grade AS prod_grade, p.id AS produ_id,"
+                                      " p.img_url as img, sp.img_url as image, p.grade as grade,"
+                                      " sp.grade as nutriscore, sp.name AS sub_name,"
+                                      " sp.id AS sub_prod_id, waf.id"
+                                      " FROM web_app_favs waf"
+                                      " INNER JOIN web_app_products p ON waf.prod_id = p.id"
+                                      " LEFT JOIN web_app_products sp ON waf.prod_substitute_id = sp.id WHERE user_id = %s", (curr_id, ))
 
     return render(request, "web_app/favorites.html", locals())
 
 
 def delete_prod(request):
     deleted = request.GET.get('value')
-    id = 'ROFL'
+    sub_id = request.GET.get('value_2')
+
+    id = "Done"
+
     try:
-        Favs.objects.filter(prod_id=deleted)[1].delete()
+
+        if sub_id:
+
+            Favs.objects.filter(prod_id=deleted, prod_substitute_id=sub_id).delete()
+        else:
+            Favs.objects.filter(prod_id=deleted)[1].delete()
 
     except IndexError:
-        print(id)
         prod = Favs.objects.filter(prod_substitute_id=deleted).first()
         product_id = prod.prod_id
         Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
@@ -225,8 +232,7 @@ def delete_prod(request):
         product_id = prod.prod_id
         Favs.objects.filter(prod_substitute_id=deleted).update(prod_substitute_id=product_id)
     except Favs.MultipleObjectsReturned:
-        # Favs.objects.get(prod_id=deleted).first()
-        print(id)
+        pass
 
     data = {'respond': id}
     return JsonResponse(data)
