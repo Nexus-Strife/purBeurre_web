@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '2sgeo63##%r81l9d605jlnaw+x46+_@g4mv@q-#(4q6o6jhq%z'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['beurre-pur.herokuapp.com']
 
 
 # Application definition
@@ -79,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql', # on utilise l'adaptateur postgresql
         'NAME': 'pur_beurre', # le nom de notre base de donnees creee precedemment
         'USER': 'nex', # attention : remplacez par votre nom d'utilisateur
-        'PASSWORD': 'C1li2tn45!',
+        'PASSWORD': '',
         'HOST': '',
         'PORT': '5432',
     }
